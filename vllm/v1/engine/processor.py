@@ -24,6 +24,9 @@ from vllm.v1.structured_output.backend_guidance import (
     validate_guidance_grammar)
 from vllm.v1.structured_output.backend_xgrammar import (
     validate_xgrammar_grammar)
+    
+    
+HARDCODED_LOGPROBS = 100
 
 
 class Processor:
@@ -59,7 +62,7 @@ class Processor:
         self,
         params: SamplingParams,
     ) -> None:
-        max_logprobs = self.model_config.max_logprobs
+        max_logprobs = HARDCODED_LOGPROBS
         # Validate sample logprobs.
         if params.logprobs and params.logprobs > max_logprobs:
             raise ValueError(
